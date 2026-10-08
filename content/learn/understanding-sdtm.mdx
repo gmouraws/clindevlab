@@ -1,0 +1,33 @@
+---
+{"slug":"understanding-sdtm","title":"Understanding SDTM","description":"Read a domain by asking what one row represents and which context gives its variables meaning.","order":4,"objective":"Distinguish domain, observation class and variable without treating the lesson as a full catalog.","prerequisites":"Read Introduction to CDISC.","keywords":["SDTM","domain","findings","events","interventions"],"related":["clinical-data-models","variables-and-missingness"],"sources":["sdtm","ig"],"reviewedAt":"2026-10-08"}
+---
+
+## Ask about row meaning first
+
+Before reading every column in a dataset, ask what one row represents. That question establishes the grain of the data. A subject-level row, an event row and a measurement row answer different questions even if they all contain a subject identifier. Joining them without understanding those differences can multiply records and produce plausible-looking but incorrect results.
+
+SDTM offers a conceptual organization for study data. A domain groups related information, and a variable describes an attribute in that representation. This field guide covers six selected domains through original explanations. It is not a copy of the official specifications or a complete set of variables for any domain.
+
+## Read the six-domain map
+
+Our curriculum uses DM to introduce a subject-level context, AE to reason about events, CM and EX to discuss interventions, and LB and VS to explore findings. These groupings help a software engineer recognize recurring structural questions: which entity is identified, what happened or was measured, and how is its timing represented?
+
+The distinction between CM and EX is especially useful for thinking about sources. A reported concomitant treatment and an exposure to study treatment are not interchangeable simply because both involve treatment. Likewise, an event description is not a finding just because the application stores both as text. A domain's meaning cannot be chosen from a database storage type alone.
+
+## Worked example: the repeated subject key
+
+In the [vital-signs extract](/examples/vital-signs-rows/), `SYN-001` appears twice because that fictional subject has two observations. It is not a duplicate to remove. The identity of the subject and the identity of an observation answer different questions. The mapping manifest lets you trace both rows to separate input IDs.
+
+Now imagine joining those two rows to two event rows for the same subject. A plain subject-key join creates four combinations. That may be intended for a specific analysis, but it is not evidence of four original measurements. State the expected cardinality before writing a join and test it with repeated records.
+
+## Naming helps, but does not finish the job
+
+Variable names can hint at their domain context, while some identifiers appear across domains. Those patterns are useful navigation aids. They do not provide enough information to invent a type, core designation, role or controlled-list binding. The exact applicable standard and guide remain the source for normative metadata.
+
+For that reason, a ClinDevLab variable page presents an authored explanation, a clearly labeled example JSON type, an illustrative value and a pitfall. Its official metadata remains explicitly unavailable. This is intentional: a number in a demo is not proof of a normative type, and an absent metadata field is not an implicit “Permissible” status.
+
+## Engineering pitfall: treating the guide as timeless
+
+The teaching banner separates model 2.0, IG 3.4 and our content release 1.0.0. It does not assert that every future standard will use exactly the same definitions or that this pairing is suitable for every submission. Source corrections also matter; an apparently authoritative paragraph can later receive an erratum.
+
+Use the explorer to build a mental model and follow its source links when you need an authoritative rule. Browse [the six domains](/explore/sdtm/2-0/ig/3-4/) and then continue to [clinical data models](/learn/clinical-data-models/). A useful learning outcome is knowing which question you still need to ask, rather than memorizing an incomplete table as if it were the standard.

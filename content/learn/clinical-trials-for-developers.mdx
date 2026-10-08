@@ -1,0 +1,33 @@
+---
+{"slug":"clinical-trials-for-developers","title":"Clinical trials for developers","description":"Understand the study context before designing the first table or endpoint.","order":1,"objective":"Explain how study, subject, site, visit and observation identities differ.","prerequisites":"Basic experience with application data models.","keywords":["study","subject","site","visit","protocol"],"related":["how-edc-systems-work","clinical-data-models"],"sources":["sdtm","edc"],"reviewedAt":"2026-10-08"}
+---
+
+## Start with the question behind the record
+
+A developer can understand the mechanics of an API without understanding what its records represent. In clinical research, that gap matters. A timestamp might describe when an observation was made, when somebody entered it, or when an integration received it. Those are three different events. A reliable design keeps their meanings explicit instead of selecting whichever timestamp is easiest to obtain.
+
+A study supplies a context for investigating a question. Its protocol describes the intended investigation, including activities and the information needed to address that question. An application supports parts of that work. It does not turn a scheduled activity into evidence that the activity occurred, and it cannot infer the entire research context from a form name.
+
+## Identify the entities before the endpoints
+
+Start with five useful concepts: study, site, subject, visit and observation. A site provides operational context. A subject identifies the participant represented by records. A visit groups activities, while an observation represents a particular piece of recorded information. These concepts can have different identity scopes. A subject label that is unique inside one site may collide with a label at another site.
+
+For an integration, ask where an identifier comes from, what it is unique within, whether it can change, and whether it survives an export. Do not assume that the primary key of an application database is the identifier a downstream dataset should expose. A key can be perfectly adequate inside one service and still be ambiguous outside it.
+
+## Worked example: two keys with different jobs
+
+Our subject-identity walkthrough uses an application key `person-a`, a study-local label `001`, and an authored subject key `SYN-001`. The application key identifies an input object. The local label preserves a human-facing representation. The authored subject key connects the small educational outputs. None is a real participant identifier.
+
+Suppose a developer converts `001` to the number `1`. The transformation looks harmless because the screen can add padding later. But a second system may compare the exact string, and the original representation has now been lost. Treat identifiers as values with contracts, not as quantities simply because they contain digits.
+
+## Planned structure and recorded evidence
+
+An application might create an expected visit in advance. That row is useful for scheduling, but it does not demonstrate that measurements were collected. A completed form can still contain missing values, corrections or questions. Conversely, a measurement can exist outside the neat schedule that a user interface displays. Keep planned and observed information distinguishable throughout your pipeline.
+
+This distinction also changes testing. A test that checks whether a form exists is different from a test that checks whether a result has the required context. Your fixtures should cover repeated observations, missing values and identity collisions, not only the happy path in which one subject has one visit and one complete form.
+
+## Engineering pitfall: one screen, one dataset
+
+A screen groups information for a person's task. An export groups information for another purpose. It is therefore unsafe to derive dataset boundaries directly from screen boundaries. First define what one output row means; then identify which source facts and transformations are needed to produce it. Record unresolved mapping questions rather than hiding them in a default value.
+
+This field guide uses small fictional extracts to make those design questions visible. It does not teach protocol design, participant care or regulatory submission preparation. Continue with [how EDC systems work](/learn/how-edc-systems-work/) and inspect the [subject-identity example](/examples/subject-identity/) to see the identifiers in actual rows.

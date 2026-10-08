@@ -1,0 +1,33 @@
+---
+{"slug":"variables-and-missingness","title":"Variables and missingness","description":"Keep identifiers, values, precision and unavailable metadata distinguishable.","order":6,"objective":"Recognize when a convenient data conversion invents information.","prerequisites":"Read Understanding SDTM.","keywords":["null","missing","date","identifier","Required","Expected","Permissible"],"related":["clinical-data-models","controlled-terminology"],"sources":["sdtm","ig"],"reviewedAt":"2026-10-08"}
+---
+
+## A field name does not tell the whole story
+
+To use a variable responsibly, you need more than its name. You need its meaning, representation, applicable context and relationship to other fields. The example JSON type shown in this explorer describes our demonstration value. It is deliberately not labeled as the official SDTM type. A string in one illustrative JSON file is not evidence for a normative specification.
+
+The same caution applies to missing metadata. When our page says official metadata is not bundled, that does not mean the standard has no rule. It means this edition is not distributing that rule. Missing knowledge about a field is different from a missing value in a row.
+
+## Three different kinds of absence
+
+An application may distinguish an absent property, an explicit null, and an empty string. Those states can carry different meanings. A conversion that turns all three into an empty CSV cell loses that distinction. Such a conversion may be appropriate for a particular contract, but it must be documented rather than treated as automatically reversible.
+
+Our example manifests state the convention: JSON null becomes an empty CSV cell. Use the JSON files when you need to inspect the distinction more precisely. The downloadable CSV is an educational view, not a guarantee that a round-trip through a spreadsheet preserves every semantic difference.
+
+## Worked example: an incomplete date
+
+The fictional event example contains `2025-02`. That value knows a month but not a day. Converting it to `2025-02-01` creates a fact that was not present. Converting it to an instant at midnight also introduces timing and timezone assumptions. Keep the string's precision intact until an explicitly justified rule says otherwise.
+
+The same example has a null end date. Null does not establish that the event is ongoing. It also does not establish that the event ended or was never reported. A source may contain a separate explanation for missingness; an integration should preserve that explanation instead of inferring it from the empty cell alone.
+
+## Presence requirements need an applicable guide
+
+Required, Expected and Permissible are standards concepts, not synonyms for HTML form validation. In a simplified orientation, Required concerns both presence and nonmissing values; Expected concerns the variable being present even when a value can be missing; Permissible involves applicability and collected information. Exact rules and exceptions belong to the applicable guide and domain context.
+
+This explorer assigns none of those statuses to its variable lessons. It would be misleading to turn an unknown status into Permissible, or to copy a designation from an older guide without checking the intended version. The [standards and versions page](/reference/standards-and-versions/) explains the teaching profile and its boundaries.
+
+## Engineering pitfall: fixing a type error by changing a fact
+
+A pipeline might reject a partial date, a comparison-qualified laboratory result, or a numeric-looking identifier with leading zeros. The easy fix is often to coerce the value. The safer engineering question is whether the target type accurately describes the information you actually have. A type error can reveal a modeling mistake rather than bad source data.
+
+Test these boundaries explicitly: null versus empty text, `001` versus `1`, partial versus full dates, and original result text versus parsed numbers. Passing those tests demonstrates consistency in your own transformation, not clinical validity or SDTM conformance. Explore [AEENDTC](/explore/sdtm/2-0/ig/3-4/domains/ae/variables/aeendtc/) and [LBORRES](/explore/sdtm/2-0/ig/3-4/domains/lb/variables/lborres/) for concrete cases.

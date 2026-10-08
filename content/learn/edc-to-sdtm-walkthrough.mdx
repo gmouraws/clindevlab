@@ -1,0 +1,37 @@
+---
+{"slug":"edc-to-sdtm-walkthrough","title":"From collection to a tabular example","description":"Trace four synthetic observations through a small, inspectable transformation.","order":8,"objective":"Account for every example output value and identify what the transformation does not establish.","prerequisites":"Read Clinical data models and Controlled terminology.","keywords":["mapping","traceability","synthetic","VS","transformation"],"related":["clinical-data-models","variables-and-missingness"],"sources":["sdtm","ig","nci"],"reviewedAt":"2026-10-08"}
+---
+
+## Begin with an explicit boundary
+
+This walkthrough is a demonstration of representation and traceability. It is not an EDC integration, a universal mapping recipe, or a submission-ready dataset. All input records were invented for ClinDevLab. Their measurement and unit tokens are visibly fictional, and no patient data or external clinical sample study was used.
+
+Open [From a collection to four observations](/examples/vital-signs-rows/) alongside this article. The example contains four source objects, four output rows and a mapping manifest. You can inspect every value in either table or record-reading mode, including on a narrow screen. Downloads contain the same fixed values as the preview.
+
+## Step 1: establish row meaning
+
+Each source object represents one authored measurement observation. Two belong to SYN-001 and two to SYN-002. Our output keeps one observation per row, so the expected count is four. This simple invariant is worth checking before any field transformation: an unexpected row count can expose a filter, join or grouping error.
+
+The sequence values distinguish rows within this small subject context. They do not claim chronological ordering or permanent source identity. The source IDs `obs-a` through `obs-d` remain available in the manifest, where each is linked to an output-row identity. That trace information is not disguised as an invented standard variable.
+
+## Step 2: account for each field
+
+The study and subject identifiers are copied from the authored input. The domain value is an explicit constant for this teaching example. The measurement token, original value, unit token and date string are preserved without normalization. The manifest identifies these decisions so that a reader can distinguish a copied value from an authored constant.
+
+This is intentionally less ambitious than a production transformation. No unit conversion occurs. No terminology service is queried. No clinical meaning is assigned to the numbers. A narrow transformation with honest limits is easier to verify than a broad transformation whose defaults quietly invent information.
+
+## Step 3: compare representations
+
+The JSON output retains the distinction between strings, numbers and nulls in the example. The CSV output provides a conventional row-and-column view, with a documented empty-cell convention. Changing the reading mode in the browser alters neither output. Soft-wrapping a code block likewise does not change the copied text or downloaded file.
+
+Compare the first row with its source object. You should be able to explain where every value came from and find its trace link. Then inspect a row for the other subject. The same structure applies, but the subject key must remain different. A transformation that accidentally reuses the first subject key could still produce four well-formed rows, which is why count checks alone are insufficient.
+
+## Step 4: name the unanswered questions
+
+A real mapping would require more context: the applicable standards and guide, study-specific decisions, verified vocabulary, timing and units, and rules for records outside the happy path. The six selected lessons do not supply a complete catalog. This example cannot establish which required fields are absent or whether a regulator would accept anything derived from it.
+
+## Engineering pitfall: overstating what a test proves
+
+A passing fixture test can prove that the generated CSV matches the authored JSON and that trace links are complete. It cannot prove clinical validity, regulatory acceptance or official terminology compliance. Keep test names and user-facing messages aligned with those limits.
+
+Continue your own learning by changing a hypothetical input on paper: remove a unit, make a date partial, or duplicate an input ID. Ask which check should fail and which uncertainty should simply be preserved. The application accepts no uploads or arbitrary clinical inputs; this exercise is about reasoning, not processing real study data.

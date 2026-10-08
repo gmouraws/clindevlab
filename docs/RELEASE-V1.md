@@ -56,3 +56,10 @@ Introduce the independent clinical software engineering field guide: eight origi
 Validation: 22 unit tests; 136 passing browser tests across 24 projects with 32 intentional duplicate-coverage skips; 78 validated static routes; no serious/critical axe findings across 13 templates; zero dependency vulnerabilities; source hygiene and reproducible notice integrity pass. Local Lighthouse performance 99/99/98 for home/article/VS; accessibility and SEO 100 throughout. CI must run once publication authorization is repaired.
 
 Release hardening adds the approved canonical origin, per-page social metadata, original favicon, public README and build-matched hosting artifacts. Original material has no outbound reuse license; dependency notices remain intact; no restricted standards or terminology data is bundled. Manual accessibility/device/Safari and qualified content review remain outstanding. Production is prepared for GitHub → Vercel → https://clindevlab.com, with www redirected to the apex, noindex previews and documented smoke/rollback procedures. Do not merge or deploy before owner approval.
+
+### Local commit evidence
+
+- `5db8a93` — `chore: initialize release review base` (local main; ignore rules only).
+- `1c20b14` — `feat: prepare ClinDevLab BUILD-002 v1 release` (local release/v1; complete reviewed candidate).
+
+A final read-only GitHub branch query returned no branches after the rejected write. No partial remote publication needs cleanup. The working tree was clean after the implementation commit. A subsequent documentation-only commit records this checkpoint; no application change requires a repeated release gate.

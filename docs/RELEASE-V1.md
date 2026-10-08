@@ -63,3 +63,11 @@ Release hardening adds the approved canonical origin, per-page social metadata, 
 - `1c20b14` — `feat: prepare ClinDevLab BUILD-002 v1 release` (local release/v1; complete reviewed candidate).
 
 A final read-only GitHub branch query returned no branches after the rejected write. No partial remote publication needs cleanup. The working tree was clean after the implementation commit. A subsequent documentation-only commit records this checkpoint; no application change requires a repeated release gate.
+
+## Publication resumed — 2026-10-08
+
+The owner authorized the existing personal connection. Reverification confirmed connector and native Git credential identity gmouraws, exact origin gmouraws/clindevlab, a clean release/v1 branch, and audited HEAD 8c2ec458d04b826c544acf618b6a5c032bfb91ab with the three expected commits. Native Git used the explicitly selected existing gmouraws credential; no credential/global-configuration changes were made.
+
+The existing commits were pushed unchanged: minimal bootstrap main and release/v1. Release PR: **https://github.com/gmouraws/clindevlab/pull/1**, targeting main. The prior integration-permission blocker is resolved. Initial push and pull-request Actions runs started successfully. Current CI results are available on the [PR checks page](https://github.com/gmouraws/clindevlab/pull/1/checks); at this documentation checkpoint they are running, not yet claimed as passed. The agent will inspect results and resolve implementation/configuration failures before returning the owner checkpoint. The final task response and PR description record the inspected final result.
+
+The PR remains open and unmerged. No Vercel deployment/project, DNS change or domain configuration was performed. Manual accessibility/device/Safari and qualified content reviews, original-material licensing awareness and the separately authorized production procedure remain owner review items.

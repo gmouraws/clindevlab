@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sdtm",
+    "publisher": "CDISC",
+    "title": "SDTM 2.0",
+    "url": "https://www.cdisc.org/standards/foundational/sdtm/sdtm-v2-0",
+    "sourceVersion": "2.0",
+    "publicationDate": "2021-11-29",
+    "accessedAt": "2026-10-08",
+    "termsUrl": "https://www.cdisc.org/terms-and-conditions",
+    "permission": "prohibited",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "CDISC — SDTM 2.0",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  },
+  {
+    "id": "ig",
+    "publisher": "CDISC",
+    "title": "SDTMIG 3.4",
+    "url": "https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4",
+    "sourceVersion": "3.4",
+    "publicationDate": "2021-11-29",
+    "accessedAt": "2026-10-08",
+    "termsUrl": "https://www.cdisc.org/terms-and-conditions",
+    "permission": "prohibited",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "CDISC — SDTMIG 3.4",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  },
+  {
+    "id": "nci",
+    "publisher": "NCI EVS",
+    "title": "CDISC Terminology",
+    "url": "https://www.cancer.gov/about-nci/organization/cbiit/vocabulary/cdisc",
+    "sourceVersion": null,
+    "publicationDate": "2025-09-03",
+    "accessedAt": "2026-10-08",
+    "termsUrl": "https://www.cancer.gov/policies/copyright-reuse",
+    "permission": "permitted",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "NCI EVS — CDISC Terminology",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  },
+  {
+    "id": "library",
+    "publisher": "CDISC",
+    "title": "CDISC Library FAQ",
+    "url": "https://www.cdisc.org/cdisc-library/faq",
+    "sourceVersion": null,
+    "publicationDate": null,
+    "accessedAt": "2026-10-08",
+    "termsUrl": "https://www.cdisc.org/terms-and-conditions",
+    "permission": "uncertain",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "CDISC — CDISC Library FAQ",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  },
+  {
+    "id": "fda",
+    "publisher": "FDA",
+    "title": "Study Data Standards Resources",
+    "url": "https://www.fda.gov/industry/fda-data-standards-advisory-board/study-data-standards-resources",
+    "sourceVersion": null,
+    "publicationDate": null,
+    "accessedAt": "2026-10-08",
+    "termsUrl": null,
+    "permission": "uncertain",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "FDA — Study Data Standards Resources",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  },
+  {
+    "id": "edc",
+    "publisher": "OpenClinica",
+    "title": "Technical documentation (legacy 3.x context)",
+    "url": "https://docs.openclinica.com/3-1-technical-documents/?r=2274",
+    "sourceVersion": "3.x",
+    "publicationDate": null,
+    "accessedAt": "2026-10-08",
+    "termsUrl": null,
+    "permission": "uncertain",
+    "approvedUses": [
+      "link"
+    ],
+    "restrictions": "Reference link only in this edition. No publisher tables, specifications or data redistributed.",
+    "attribution": "OpenClinica — Technical documentation (legacy 3.x context)",
+    "reviewedAt": "2026-10-08",
+    "evidenceNote": "See DATA-SOURCES-AND-LICENSING.md. Source supports conceptual context; original lesson text is independently authored."
+  }
+]

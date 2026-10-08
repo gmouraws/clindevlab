@@ -1,0 +1,1618 @@
+{
+  "domains": [
+    {
+      "code": "DM",
+      "slug": "dm",
+      "teachingTitle": "Demographics",
+      "class": "special-purpose",
+      "heading": "Start with the participant",
+      "summary": "A subject-level view gives observations a common identity, rather than repeating background attributes in every measurement row.",
+      "recordGranularityExplanation": "One subject in the teaching extract. This is a useful join anchor, not a complete submission definition.",
+      "explanation": "Imagine two app databases both assign participant number 001. A stable study-aware identity prevents a join from attaching one person's observations to another. Keep local application keys separate from exported identifiers.",
+      "pitfall": "Treating a demographic row as a mutable master record can erase the meaning of an earlier extract. Preserve the extraction context and document changes.",
+      "exampleIds": [
+        "subject-identity"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "SUBJID",
+        "AGE",
+        "SEX",
+        "RFSTDTC"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    },
+    {
+      "code": "AE",
+      "slug": "ae",
+      "teachingTitle": "Adverse Events",
+      "class": "events",
+      "heading": "Follow an occurrence over time",
+      "summary": "Event data describes something that happened, with dates that may have different precision and an account of what was reported.",
+      "recordGranularityExplanation": "One fictional reported event per row; multiple rows can belong to one subject.",
+      "explanation": "An event may begin in a known month but lack an exact day. Preserve that uncertainty instead of forcing it through a date-picker default. The identity of an event is separate from its position in a sorted table.",
+      "pitfall": "A severity description does not determine seriousness. Neither a UI color nor symptom wording can safely derive a clinical classification.",
+      "exampleIds": [
+        "adverse-events-timing"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "AESEQ",
+        "AETERM",
+        "AESTDTC",
+        "AEENDTC",
+        "AESER"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    },
+    {
+      "code": "CM",
+      "slug": "cm",
+      "teachingTitle": "Concomitant Medications",
+      "class": "interventions",
+      "heading": "Describe treatment alongside a study",
+      "summary": "Medication records help describe treatment occurring around a study without assuming it is the study intervention itself.",
+      "recordGranularityExplanation": "One authored treatment record in this lesson; real record granularity needs the applicable guide and study specification.",
+      "explanation": "A participant may report a treatment name and a partial start date. Store the original report and its provenance before attempting standardization. A product identifier in an application is not automatically an approved dictionary code.",
+      "pitfall": "Do not join medications by display name or infer a controlled drug code from free text. Repeated courses may need distinct identities even when their names match.",
+      "exampleIds": [
+        "subject-identity"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "CMSEQ",
+        "CMTRT",
+        "CMSTDTC",
+        "CMENDTC"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    },
+    {
+      "code": "EX",
+      "slug": "ex",
+      "teachingTitle": "Exposure",
+      "class": "interventions",
+      "heading": "Separate a plan from an administration",
+      "summary": "Exposure lessons focus on treatment represented in the study data rather than what a scheduling screen says should occur.",
+      "recordGranularityExplanation": "One illustrative treatment exposure record, not a complete dosing history.",
+      "explanation": "A planned dose is an instruction; an observed administration is evidence of an action. A system that treats a scheduled item as a completed event can manufacture exposure. Keep the two states distinct before considering any tabulation.",
+      "pitfall": "A dose number alone has no unit, route or timing context. Our short lesson deliberately does not claim that EXDOSE is enough to describe an administration.",
+      "exampleIds": [
+        "subject-identity"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "EXSEQ",
+        "EXTRT",
+        "EXDOSE"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    },
+    {
+      "code": "LB",
+      "slug": "lb",
+      "teachingTitle": "Laboratory Tests",
+      "class": "findings",
+      "heading": "Keep a result with its context",
+      "summary": "A laboratory value is only interpretable with its test identity, unit, collection context and representation.",
+      "recordGranularityExplanation": "One test result per row in the teaching model; it is not one row per laboratory panel.",
+      "explanation": "A form may present several results in adjacent cells. A findings-oriented representation can instead put each result on its own row. Keeping the original result as text preserves qualifiers that a numeric database column would discard.",
+      "pitfall": "Do not strip comparison symbols or silently convert units. Neither the selected variables nor the illustrative values provide a clinical interpretation or a full laboratory mapping.",
+      "exampleIds": [
+        "vital-signs-rows"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "LBSEQ",
+        "LBTESTCD",
+        "LBORRES",
+        "LBORRESU",
+        "LBDTC"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    },
+    {
+      "code": "VS",
+      "slug": "vs",
+      "teachingTitle": "Vital Signs",
+      "class": "findings",
+      "heading": "Turn measurements into observations",
+      "summary": "Repeated measurements make the difference between a collection form and an observation table visible.",
+      "recordGranularityExplanation": "One fictional measurement per subject per row; our example contains two measurements for each of two subjects.",
+      "explanation": "A single encounter object can contain several measurements. Flattening it into one wide record hides the repeating measurement structure. Follow the input observation ID through the mapping manifest to see which source observation produced each output row.",
+      "pitfall": "Do not call a made-up measurement token official terminology. The walkthrough uses explicit teaching tokens and never claims a submission-ready dataset.",
+      "exampleIds": [
+        "vital-signs-rows"
+      ],
+      "variableNames": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "VSSEQ",
+        "VSTESTCD",
+        "VSORRES",
+        "VSORRESU",
+        "VSDTC"
+      ],
+      "articleSlugs": [
+        "understanding-sdtm",
+        "clinical-data-models"
+      ],
+      "authorship": "original",
+      "reviewedAt": "2026-10-08",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind DM",
+      "explanation": "The study identifier places this demographics extract in the fictional study CLD-SYN-001. Keep that context when comparing subject records from separate studies.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a DM export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the DM representation",
+      "explanation": "The value DM marks the subject-level demographics context in this lesson. It distinguishes the identity record from the participant’s repeated measurements or event records.",
+      "exampleValue": "DM",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign DM just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join DM observations to a subject",
+      "explanation": "The fictional subject key anchors the demographics lesson. Use it to connect the participant’s background record with observations, rather than joining on the local subject number alone.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated DM rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:SUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "SUBJID",
+      "slug": "subjid",
+      "teachingTitle": "The study-local subject label",
+      "explanation": "A local participant label can be meaningful within a study without being globally unique. Preserve it as a string so leading zeros survive export and re-import.",
+      "exampleValue": "001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not parse 001 as the number 1; that transformation changes an identifier, not just its formatting.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:AGE",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "AGE",
+      "slug": "age",
+      "teachingTitle": "A recorded age example",
+      "explanation": "The integer here demonstrates a reported attribute. This lesson does not calculate age from dates or define an age reference point; those decisions require a documented study rule.",
+      "exampleValue": 34,
+      "exampleJsonType": "number",
+      "pitfall": "Do not invent a birth date to explain a supplied age. A precise-looking derived value can conceal an unsupported assumption.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:SEX",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "SEX",
+      "slug": "sex",
+      "teachingTitle": "A categorical field with an external vocabulary",
+      "explanation": "This lesson shows where a categorical value might appear. Its sample is null because no verified terminology package is bundled; null is an educational missing value, not an official submission instruction.",
+      "exampleValue": null,
+      "exampleJsonType": "null",
+      "pitfall": "A UI label, a concept identifier and a submission value are distinct. Do not infer the allowed list from a database enum.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "controlled-terminology"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:DM:RFSTDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "DM",
+      "name": "RFSTDTC",
+      "slug": "rfstdtc",
+      "teachingTitle": "A reference date, not a universal start",
+      "explanation": "A reference date can anchor later time descriptions. Our complete date string illustrates representation only; deciding which event supplies the reference requires the applicable study rules.",
+      "exampleValue": "2025-01-10",
+      "exampleJsonType": "string",
+      "pitfall": "Do not substitute a registration timestamp merely because it is the first date your application stores.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind AE",
+      "explanation": "The study identifier keeps the adverse-event extract within its study context. Preserve it when combining event records from multiple study exports.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a AE export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the AE representation",
+      "explanation": "The value AE identifies the adverse-event context in this lesson. An event term and its timing belong together here; they do not describe a measurement or a medication record.",
+      "exampleValue": "AE",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign AE just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join AE observations to a subject",
+      "explanation": "The fictional subject key connects an adverse event to its participant. Several events can concern the same participant, so the subject key alone does not distinguish individual event rows.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated AE rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:AESEQ",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "AESEQ",
+      "slug": "aeseq",
+      "teachingTitle": "Distinguish AE records",
+      "explanation": "This example sequence number separates rows inside the AE teaching extract. It is useful for referring to an observation, but the original collection identifier is retained separately in the mapping manifest.",
+      "exampleValue": 1,
+      "exampleJsonType": "number",
+      "pitfall": "Do not interpret AESEQ as elapsed time, clinical priority or a stable database key across independently generated exports.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:AETERM",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "AETERM",
+      "slug": "aeterm",
+      "teachingTitle": "Keep the reported event wording",
+      "explanation": "Original event text captures what was reported before dictionary coding. The fictional symptom phrase here is independently authored and carries no medical dictionary code.",
+      "exampleValue": "Brief discomfort after walking",
+      "exampleJsonType": "string",
+      "pitfall": "Do not overwrite the original text with a guessed standardized diagnosis. Retain the report and document any separately authorized coding process.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:AESTDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "AESTDTC",
+      "slug": "aestdtc",
+      "teachingTitle": "Preserve the known start precision",
+      "explanation": "A month-only string expresses a different amount of knowledge from a full calendar date. Keeping the original precision makes that difference inspectable.",
+      "exampleValue": "2025-02",
+      "exampleJsonType": "string",
+      "pitfall": "Do not transform a month-only date into its first day. That creates information the source did not provide.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:AEENDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "AEENDTC",
+      "slug": "aeendtc",
+      "teachingTitle": "An end date can remain unknown",
+      "explanation": "A missing end date is represented as null in our JSON extract. The example does not decide whether an event is ongoing, unknown or simply not collected; those are separate questions.",
+      "exampleValue": null,
+      "exampleJsonType": "null",
+      "pitfall": "Never infer that null means the event ended, continued, or did not occur. Preserve the reason separately when the source provides one.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:AE:AESER",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "AE",
+      "name": "AESER",
+      "slug": "aeser",
+      "teachingTitle": "Keep seriousness distinct from severity",
+      "explanation": "This lesson reserves a place for a seriousness-related value but leaves it null. We do not apply clinical criteria or claim a verified controlled value in this edition.",
+      "exampleValue": null,
+      "exampleJsonType": "null",
+      "pitfall": "A symptom intensity score cannot be used as an automatic seriousness classifier. An apparently severe symptom and a serious event are not interchangeable concepts.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "controlled-terminology"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind CM",
+      "explanation": "The study identifier gives the medication-use teaching record its study context. Keep it with the medication description and timing when assembling an extract.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a CM export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the CM representation",
+      "explanation": "The value CM identifies the concomitant-medication context in this lesson. It separates medication-use descriptions from the study-treatment exposure context illustrated by EX.",
+      "exampleValue": "CM",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign CM just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join CM observations to a subject",
+      "explanation": "The fictional subject key associates medication-use information with a participant. It supports a subject-level connection to other domains, but does not prove that a medication caused or treated a particular event.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated CM rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:CMSEQ",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "CMSEQ",
+      "slug": "cmseq",
+      "teachingTitle": "Distinguish CM records",
+      "explanation": "This example sequence number separates rows inside the CM teaching extract. It is useful for referring to an observation, but the original collection identifier is retained separately in the mapping manifest.",
+      "exampleValue": 1,
+      "exampleJsonType": "number",
+      "pitfall": "Do not interpret CMSEQ as elapsed time, clinical priority or a stable database key across independently generated exports.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:CMTRT",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "CMTRT",
+      "slug": "cmtrt",
+      "teachingTitle": "Retain the treatment as reported",
+      "explanation": "A fictional treatment phrase illustrates recorded treatment text. It is not a drug dictionary entry, code or recommendation.",
+      "exampleValue": "Fictional supportive treatment",
+      "exampleJsonType": "string",
+      "pitfall": "Do not match medicines solely by free-text equality; naming, formulation and coding context can differ.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:CMSTDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "CMSTDTC",
+      "slug": "cmstdtc",
+      "teachingTitle": "A treatment start with known precision",
+      "explanation": "A treatment history may contain a month rather than an exact day. This authored example preserves the month as text for later review.",
+      "exampleValue": "2025-01",
+      "exampleJsonType": "string",
+      "pitfall": "Avoid filling in a calendar day just to satisfy an application date type. Preserve partial precision through every intermediate format.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:CM:CMENDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "CM",
+      "name": "CMENDTC",
+      "slug": "cmendtc",
+      "teachingTitle": "A treatment end without an invented date",
+      "explanation": "Null shows an absent value in our JSON convention. A production mapping would distinguish the source's reason for absence before choosing its output representation.",
+      "exampleValue": null,
+      "exampleJsonType": "null",
+      "pitfall": "Do not turn a missing end into today's date. That would change a treatment history every time the pipeline runs.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind EX",
+      "explanation": "The study identifier places the treatment-exposure teaching record in its study. Preserve that context when interpreting the treatment description and recorded dose.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a EX export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the EX representation",
+      "explanation": "The value EX identifies the study-treatment exposure context in this lesson. It distinguishes the treatment and dose representation from the concomitant-medication context illustrated by CM.",
+      "exampleValue": "EX",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign EX just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join EX observations to a subject",
+      "explanation": "The fictional subject key connects a treatment-exposure record to its participant. Joining exposure and event records by subject alone does not establish their timing or a causal relationship.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated EX rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:EXSEQ",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "EXSEQ",
+      "slug": "exseq",
+      "teachingTitle": "Distinguish EX records",
+      "explanation": "This example sequence number separates rows inside the EX teaching extract. It is useful for referring to an observation, but the original collection identifier is retained separately in the mapping manifest.",
+      "exampleValue": 1,
+      "exampleJsonType": "number",
+      "pitfall": "Do not interpret EXSEQ as elapsed time, clinical priority or a stable database key across independently generated exports.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:EXTRT",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "EXTRT",
+      "slug": "extrt",
+      "teachingTitle": "Identify the treatment being represented",
+      "explanation": "The invented treatment name makes the row's topic readable without importing a product catalog or dictionary.",
+      "exampleValue": "Fictional study treatment",
+      "exampleJsonType": "string",
+      "pitfall": "A planned treatment assignment is not evidence that it was administered. Keep scheduling and actual exposure sources separate.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:EX:EXDOSE",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "EX",
+      "name": "EXDOSE",
+      "slug": "exdose",
+      "teachingTitle": "Read a number with its missing context",
+      "explanation": "The number illustrates JSON numeric representation. Our selected fields omit unit, schedule and other dosing context, so this row cannot support a dosing interpretation.",
+      "exampleValue": 10,
+      "exampleJsonType": "number",
+      "pitfall": "Do not add or compare doses across records without verifying units and timing. This number is not a clinical instruction.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind LB",
+      "explanation": "The study identifier keeps laboratory-result teaching rows in their study context. It does not identify the laboratory test, specimen or measurement unit.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a LB export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the LB representation",
+      "explanation": "The value LB identifies the laboratory-result context in this lesson. Read it alongside the test code, original result, unit and collection timing to understand the observation.",
+      "exampleValue": "LB",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign LB just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join LB observations to a subject",
+      "explanation": "The fictional subject key links laboratory observations to a participant. Multiple tests can share this key; the test and timing context are still needed to interpret each result.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated LB rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:LBSEQ",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "LBSEQ",
+      "slug": "lbseq",
+      "teachingTitle": "Distinguish LB records",
+      "explanation": "This example sequence number separates rows inside the LB teaching extract. It is useful for referring to an observation, but the original collection identifier is retained separately in the mapping manifest.",
+      "exampleValue": 1,
+      "exampleJsonType": "number",
+      "pitfall": "Do not interpret LBSEQ as elapsed time, clinical priority or a stable database key across independently generated exports.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:LBTESTCD",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "LBTESTCD",
+      "slug": "lbtestcd",
+      "teachingTitle": "Identify which finding a row represents",
+      "explanation": "An authored token separates one fictional laboratory measurement from another. It illustrates a short identifier but is not a verified CDISC submission value.",
+      "exampleValue": "DEMO_LAB",
+      "exampleJsonType": "string",
+      "pitfall": "A column identifier and a controlled test code solve different problems. Do not publish application labels as approved terminology.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "controlled-terminology"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:LBORRES",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "LBORRES",
+      "slug": "lborres",
+      "teachingTitle": "Preserve the original result text",
+      "explanation": "The illustrative text preserves a comparison sign along with a number. A source result may contain information that a direct floating-point cast loses.",
+      "exampleValue": "<5",
+      "exampleJsonType": "string",
+      "pitfall": "Parsing this as 5 destroys the qualifier. Keep original text and any later numeric interpretation separately traceable.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:LBORRESU",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "LBORRESU",
+      "slug": "lborresu",
+      "teachingTitle": "Keep the reported unit nearby",
+      "explanation": "The illustrative unit text is deliberately marked as teaching-only. The value should travel with its result rather than being inferred from a screen caption.",
+      "exampleValue": "DEMO_UNIT",
+      "exampleJsonType": "string",
+      "pitfall": "Do not assume all results of one test share a unit. A downstream conversion needs an explicit, reviewed rule.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:LB:LBDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "LB",
+      "name": "LBDTC",
+      "slug": "lbdtc",
+      "teachingTitle": "Associate time with the observation",
+      "explanation": "A complete date string illustrates a finding's timing context without assigning a timezone or inventing collection time.",
+      "exampleValue": "2025-02-03",
+      "exampleJsonType": "string",
+      "pitfall": "An import timestamp describes your pipeline, not necessarily when a specimen was collected. Preserve those separate meanings.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:STUDYID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "STUDYID",
+      "slug": "studyid",
+      "teachingTitle": "Locate the study behind VS",
+      "explanation": "The study identifier keeps the vital-signs walkthrough within fictional study CLD-SYN-001. Carry it across the repeated observation rows produced from the synthetic input.",
+      "exampleValue": "CLD-SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Do not treat a VS export filename as the study identity. Files can be renamed or combined; preserve the identifier within the data.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:DOMAIN",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "DOMAIN",
+      "slug": "domain",
+      "teachingTitle": "Identify the VS representation",
+      "explanation": "The value VS identifies the vital-signs context in this lesson. The walkthrough represents separate observations as rows, each with a test code, result, unit and timing context.",
+      "exampleValue": "VS",
+      "exampleJsonType": "string",
+      "pitfall": "A form can contribute data to more than one representation. Do not assign VS just because a screen has a similar title.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:USUBJID",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "USUBJID",
+      "slug": "usubjid",
+      "teachingTitle": "Join VS observations to a subject",
+      "explanation": "The fictional subject key connects the repeated vital-signs rows to their participant. It repeats across observations, so a subject-level join must preserve each observation’s test and timing context.",
+      "exampleValue": "SYN-001",
+      "exampleJsonType": "string",
+      "pitfall": "Repeated VS rows may belong to one subject. Check cardinality before joining them to avoid accidentally multiplying observations.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:VSSEQ",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "VSSEQ",
+      "slug": "vsseq",
+      "teachingTitle": "Distinguish VS records",
+      "explanation": "This example sequence number separates rows inside the VS teaching extract. It is useful for referring to an observation, but the original collection identifier is retained separately in the mapping manifest.",
+      "exampleValue": 1,
+      "exampleJsonType": "number",
+      "pitfall": "Do not interpret VSSEQ as elapsed time, clinical priority or a stable database key across independently generated exports.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:VSTESTCD",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "VSTESTCD",
+      "slug": "vstestcd",
+      "teachingTitle": "Distinguish repeated measurements",
+      "explanation": "The example token identifies one type of fictional observation in the walkthrough. It is an authored teaching token, not verified terminology.",
+      "exampleValue": "DEMO_A",
+      "exampleJsonType": "string",
+      "pitfall": "Do not infer a controlled-list binding from this field name. A real binding needs release-specific evidence.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "controlled-terminology"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:VSORRES",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "VSORRES",
+      "slug": "vsorres",
+      "teachingTitle": "Keep the collected representation",
+      "explanation": "The string is the observation's recorded representation. We keep it as text even when it looks numeric, so the lesson separates representation from later interpretation.",
+      "exampleValue": "72",
+      "exampleJsonType": "string",
+      "pitfall": "A numeric-looking string does not establish its precision, unit, test or clinical meaning. Converting it automatically can lose source detail.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:VSORRESU",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "VSORRESU",
+      "slug": "vsorresu",
+      "teachingTitle": "Carry units with the value",
+      "explanation": "An explicitly fictional unit accompanies the result in the example. It demonstrates why a result without contextual fields is ambiguous.",
+      "exampleValue": "DEMO_UNIT",
+      "exampleJsonType": "string",
+      "pitfall": "A frontend unit label must not silently become the export's unit. Verify the source field and any conversion rule.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    },
+    {
+      "id": "sdtm-2-0_ig-3-4:VS:VSDTC",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "domainCode": "VS",
+      "name": "VSDTC",
+      "slug": "vsdtc",
+      "teachingTitle": "Keep collection timing distinct",
+      "explanation": "This string preserves the recorded date of an authored observation. It is not a processing timestamp or a timezone-normalized instant.",
+      "exampleValue": "2025-02-03",
+      "exampleJsonType": "string",
+      "pitfall": "Do not append midnight UTC to a date-only observation. That suggests timing precision and timezone knowledge that are absent.",
+      "sourceRefs": [
+        {
+          "sourceId": "sdtm",
+          "locator": "Conceptual model",
+          "claimScope": "Conceptual education; not copied normative metadata"
+        },
+        {
+          "sourceId": "ig",
+          "locator": "Version context",
+          "claimScope": "Teaching context only"
+        }
+      ],
+      "relatedArticleSlugs": [
+        "variables-and-missingness",
+        "understanding-sdtm"
+      ],
+      "authorship": "original",
+      "officialMetadata": null,
+      "reviewedAt": "2026-10-08"
+    }
+  ]
+}

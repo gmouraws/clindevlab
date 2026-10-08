@@ -1,0 +1,499 @@
+[
+  {
+    "id": "subject-identity",
+    "title": "One subject, several identities",
+    "summary": "Separate an app-local key from the identifiers used to join an educational extract.",
+    "domain": "DM",
+    "input": [
+      {
+        "id": "person-a",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-001",
+        "localLabel": "001",
+        "age": 34,
+        "referenceDate": "2025-01-10"
+      },
+      {
+        "id": "person-b",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-002",
+        "localLabel": "002",
+        "age": 47,
+        "referenceDate": "2025-01-12"
+      }
+    ],
+    "columns": [
+      "STUDYID",
+      "DOMAIN",
+      "USUBJID",
+      "SUBJID",
+      "AGE",
+      "SEX",
+      "RFSTDTC"
+    ],
+    "output": [
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "DM",
+        "USUBJID": "SYN-001",
+        "SUBJID": "001",
+        "AGE": 34,
+        "SEX": null,
+        "RFSTDTC": "2025-01-10"
+      },
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "DM",
+        "USUBJID": "SYN-002",
+        "SUBJID": "002",
+        "AGE": 47,
+        "SEX": null,
+        "RFSTDTC": "2025-01-12"
+      }
+    ],
+    "limitations": [
+      "This extract omits many fields and is not a complete DM dataset.",
+      "Ages and reference dates are invented; no protocol-specific derivation is demonstrated.",
+      "SEX is null; no controlled value or allowed list is asserted."
+    ],
+    "explanation": "The application keys person-a and person-b are convenient for the invented input. The output uses SYN-001 and SYN-002 as its stable subject references. Keeping the original input IDs in the manifest lets you inspect the transformation without claiming those IDs are SDTM variables. Notice that SUBJID remains a string: converting 001 to a number would silently change its representation.",
+    "manifest": {
+      "id": "subject-identity",
+      "contentVersion": "1.0.0",
+      "synthetic": true,
+      "authorship": "original",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "inputFile": "input.json",
+      "outputJsonFile": "output.json",
+      "outputCsvFile": "output.csv",
+      "expectedRowCount": 2,
+      "columnOrder": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "SUBJID",
+        "AGE",
+        "SEX",
+        "RFSTDTC"
+      ],
+      "exampleFieldTypes": {
+        "STUDYID": "string",
+        "DOMAIN": "string",
+        "USUBJID": "string",
+        "SUBJID": "string",
+        "AGE": "number",
+        "SEX": "null",
+        "RFSTDTC": "string"
+      },
+      "nullConvention": "JSON null becomes an empty CSV cell. Empty CSV cells cannot distinguish absent from empty text; use JSON for that distinction.",
+      "mappings": [
+        {
+          "inputPath": "study",
+          "outputField": "STUDYID",
+          "explanation": "Copy the fictional study identifier."
+        },
+        {
+          "inputPath": "subject",
+          "outputField": "USUBJID",
+          "explanation": "Copy the stable authored subject key; do not expose the app-local id."
+        },
+        {
+          "inputPath": "localLabel",
+          "outputField": "SUBJID",
+          "explanation": "Preserve the string and leading zeros."
+        },
+        {
+          "inputPath": "age",
+          "outputField": "AGE",
+          "explanation": "Copy an invented integer; no age derivation is implied."
+        },
+        {
+          "inputPath": "referenceDate",
+          "outputField": "RFSTDTC",
+          "explanation": "Preserve the date string; this is not a universal reference-date rule."
+        },
+        {
+          "inputPath": "(authored)",
+          "outputField": "DOMAIN",
+          "explanation": "Set constant DM for this teaching example."
+        },
+        {
+          "inputPath": "(not collected)",
+          "outputField": "SEX",
+          "explanation": "Missing categorical values stay null; no controlled terminology lookup."
+        }
+      ],
+      "traceLinks": [
+        {
+          "inputRowId": "person-a",
+          "outputRowId": "subject-identity:1"
+        },
+        {
+          "inputRowId": "person-b",
+          "outputRowId": "subject-identity:2"
+        }
+      ],
+      "limitations": [
+        "This extract omits many fields and is not a complete DM dataset.",
+        "Ages and reference dates are invented; no protocol-specific derivation is demonstrated.",
+        "SEX is null; no controlled value or allowed list is asserted."
+      ],
+      "ctClaims": [],
+      "reviewedAt": "2026-10-08"
+    }
+  },
+  {
+    "id": "vital-signs-rows",
+    "title": "From a collection to four observations",
+    "summary": "Follow each fictional measurement into its own row and keep a trace back to the input.",
+    "domain": "VS",
+    "input": [
+      {
+        "id": "obs-a",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-001",
+        "measurement": "DEMO_A",
+        "value": "72",
+        "unit": "DEMO_UNIT",
+        "date": "2025-02-03"
+      },
+      {
+        "id": "obs-b",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-001",
+        "measurement": "DEMO_B",
+        "value": "18",
+        "unit": "DEMO_UNIT",
+        "date": "2025-02-03"
+      },
+      {
+        "id": "obs-c",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-002",
+        "measurement": "DEMO_A",
+        "value": "75",
+        "unit": "DEMO_UNIT",
+        "date": "2025-02-04"
+      },
+      {
+        "id": "obs-d",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-002",
+        "measurement": "DEMO_B",
+        "value": "20",
+        "unit": "DEMO_UNIT",
+        "date": "2025-02-04"
+      }
+    ],
+    "columns": [
+      "STUDYID",
+      "DOMAIN",
+      "USUBJID",
+      "VSSEQ",
+      "VSTESTCD",
+      "VSORRES",
+      "VSORRESU",
+      "VSDTC"
+    ],
+    "limitations": [
+      "DEMO_A, DEMO_B and DEMO_UNIT are invented teaching tokens, not verified CDISC terminology.",
+      "The extract omits required context for a complete findings dataset.",
+      "No unit conversion, clinical interpretation or standards validation is performed."
+    ],
+    "explanation": "Each input observation yields exactly one output row. Two subjects with two observations each produce four rows, not a wide record with two measurement columns. Sequence numbers distinguish this example's rows within a subject, while the manifest retains the actual input IDs. Values stay as strings so the demonstration does not silently impose numeric interpretation.",
+    "output": [
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "VS",
+        "USUBJID": "SYN-001",
+        "VSSEQ": 1,
+        "VSTESTCD": "DEMO_A",
+        "VSORRES": "72",
+        "VSORRESU": "DEMO_UNIT",
+        "VSDTC": "2025-02-03"
+      },
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "VS",
+        "USUBJID": "SYN-001",
+        "VSSEQ": 2,
+        "VSTESTCD": "DEMO_B",
+        "VSORRES": "18",
+        "VSORRESU": "DEMO_UNIT",
+        "VSDTC": "2025-02-03"
+      },
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "VS",
+        "USUBJID": "SYN-002",
+        "VSSEQ": 1,
+        "VSTESTCD": "DEMO_A",
+        "VSORRES": "75",
+        "VSORRESU": "DEMO_UNIT",
+        "VSDTC": "2025-02-04"
+      },
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "VS",
+        "USUBJID": "SYN-002",
+        "VSSEQ": 2,
+        "VSTESTCD": "DEMO_B",
+        "VSORRES": "20",
+        "VSORRESU": "DEMO_UNIT",
+        "VSDTC": "2025-02-04"
+      }
+    ],
+    "manifest": {
+      "id": "vital-signs-rows",
+      "contentVersion": "1.0.0",
+      "synthetic": true,
+      "authorship": "original",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "inputFile": "input.json",
+      "outputJsonFile": "output.json",
+      "outputCsvFile": "output.csv",
+      "expectedRowCount": 4,
+      "columnOrder": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "VSSEQ",
+        "VSTESTCD",
+        "VSORRES",
+        "VSORRESU",
+        "VSDTC"
+      ],
+      "exampleFieldTypes": {
+        "STUDYID": "string",
+        "DOMAIN": "string",
+        "USUBJID": "string",
+        "VSSEQ": "number",
+        "VSTESTCD": "string",
+        "VSORRES": "string",
+        "VSORRESU": "string",
+        "VSDTC": "string"
+      },
+      "nullConvention": "JSON null becomes an empty CSV cell. Empty CSV cells cannot distinguish absent from empty text; use JSON for that distinction.",
+      "mappings": [
+        {
+          "inputPath": "study",
+          "outputField": "STUDYID",
+          "explanation": "Copy study identity."
+        },
+        {
+          "inputPath": "subject",
+          "outputField": "USUBJID",
+          "explanation": "Copy the authored subject key."
+        },
+        {
+          "inputPath": "measurement",
+          "outputField": "VSTESTCD",
+          "explanation": "Copy the explicit teaching token; this is not terminology normalization."
+        },
+        {
+          "inputPath": "value",
+          "outputField": "VSORRES",
+          "explanation": "Preserve the original string."
+        },
+        {
+          "inputPath": "unit",
+          "outputField": "VSORRESU",
+          "explanation": "Preserve the fictional unit token."
+        },
+        {
+          "inputPath": "date",
+          "outputField": "VSDTC",
+          "explanation": "Preserve recorded precision; do not add a timezone."
+        },
+        {
+          "inputPath": "(authored)",
+          "outputField": "DOMAIN",
+          "explanation": "Set constant VS for this teaching example."
+        },
+        {
+          "inputPath": "(authored)",
+          "outputField": "VSSEQ",
+          "explanation": "Assign fixed example sequence numbers within each subject; not a general sequencing rule."
+        }
+      ],
+      "traceLinks": [
+        {
+          "inputRowId": "obs-a",
+          "outputRowId": "vital-signs-rows:1"
+        },
+        {
+          "inputRowId": "obs-b",
+          "outputRowId": "vital-signs-rows:2"
+        },
+        {
+          "inputRowId": "obs-c",
+          "outputRowId": "vital-signs-rows:3"
+        },
+        {
+          "inputRowId": "obs-d",
+          "outputRowId": "vital-signs-rows:4"
+        }
+      ],
+      "limitations": [
+        "DEMO_A, DEMO_B and DEMO_UNIT are invented teaching tokens, not verified CDISC terminology.",
+        "The extract omits required context for a complete findings dataset.",
+        "No unit conversion, clinical interpretation or standards validation is performed."
+      ],
+      "ctClaims": [],
+      "reviewedAt": "2026-10-08"
+    }
+  },
+  {
+    "id": "adverse-events-timing",
+    "title": "A date can be precise about uncertainty",
+    "summary": "Keep a complete date, a partial date and a missing end date distinct.",
+    "domain": "AE",
+    "input": [
+      {
+        "id": "event-a",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-001",
+        "report": "Brief discomfort after walking",
+        "start": "2025-02-03",
+        "end": "2025-02-04"
+      },
+      {
+        "id": "event-b",
+        "study": "CLD-SYN-001",
+        "subject": "SYN-002",
+        "report": "Intermittent fictional symptom",
+        "start": "2025-02",
+        "end": null
+      }
+    ],
+    "columns": [
+      "STUDYID",
+      "DOMAIN",
+      "USUBJID",
+      "AESEQ",
+      "AETERM",
+      "AESTDTC",
+      "AEENDTC",
+      "AESER"
+    ],
+    "limitations": [
+      "Symptom text is fictional and uncoded; no medical dictionary is used.",
+      "AESER remains null; the example does not assess seriousness or infer it from severity.",
+      "Partial dates are retained without imputation, and this is not a complete AE dataset."
+    ],
+    "explanation": "The second start value tells us a month but no day. Replacing it with February 1 would manufacture precision. Similarly, a null end value is not proof that an event is ongoing. Those interpretation decisions are intentionally outside this small transformation. A reliable pipeline can preserve the source faithfully while leaving an unsupported inference unmade.",
+    "output": [
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "AE",
+        "USUBJID": "SYN-001",
+        "AESEQ": 1,
+        "AETERM": "Brief discomfort after walking",
+        "AESTDTC": "2025-02-03",
+        "AEENDTC": "2025-02-04",
+        "AESER": null
+      },
+      {
+        "STUDYID": "CLD-SYN-001",
+        "DOMAIN": "AE",
+        "USUBJID": "SYN-002",
+        "AESEQ": 1,
+        "AETERM": "Intermittent fictional symptom",
+        "AESTDTC": "2025-02",
+        "AEENDTC": null,
+        "AESER": null
+      }
+    ],
+    "manifest": {
+      "id": "adverse-events-timing",
+      "contentVersion": "1.0.0",
+      "synthetic": true,
+      "authorship": "original",
+      "profileId": "sdtm-2-0_ig-3-4",
+      "inputFile": "input.json",
+      "outputJsonFile": "output.json",
+      "outputCsvFile": "output.csv",
+      "expectedRowCount": 2,
+      "columnOrder": [
+        "STUDYID",
+        "DOMAIN",
+        "USUBJID",
+        "AESEQ",
+        "AETERM",
+        "AESTDTC",
+        "AEENDTC",
+        "AESER"
+      ],
+      "exampleFieldTypes": {
+        "STUDYID": "string",
+        "DOMAIN": "string",
+        "USUBJID": "string",
+        "AESEQ": "number",
+        "AETERM": "string",
+        "AESTDTC": "string",
+        "AEENDTC": "string",
+        "AESER": "null"
+      },
+      "nullConvention": "JSON null becomes an empty CSV cell. Empty CSV cells cannot distinguish absent from empty text; use JSON for that distinction.",
+      "mappings": [
+        {
+          "inputPath": "study",
+          "outputField": "STUDYID",
+          "explanation": "Copy study identity."
+        },
+        {
+          "inputPath": "subject",
+          "outputField": "USUBJID",
+          "explanation": "Copy the fictional subject identity."
+        },
+        {
+          "inputPath": "report",
+          "outputField": "AETERM",
+          "explanation": "Copy independently authored uncoded wording."
+        },
+        {
+          "inputPath": "start",
+          "outputField": "AESTDTC",
+          "explanation": "Keep full or partial precision unchanged."
+        },
+        {
+          "inputPath": "end",
+          "outputField": "AEENDTC",
+          "explanation": "Keep null distinct from a date; do not infer ongoing status."
+        },
+        {
+          "inputPath": "(authored)",
+          "outputField": "DOMAIN",
+          "explanation": "Set constant AE for this teaching example."
+        },
+        {
+          "inputPath": "(authored)",
+          "outputField": "AESEQ",
+          "explanation": "Assign fixed example sequence numbers within each subject; not a general sequencing rule."
+        },
+        {
+          "inputPath": "(not collected)",
+          "outputField": "AESER",
+          "explanation": "Missing categorical values stay null; no controlled terminology lookup."
+        }
+      ],
+      "traceLinks": [
+        {
+          "inputRowId": "event-a",
+          "outputRowId": "adverse-events-timing:1"
+        },
+        {
+          "inputRowId": "event-b",
+          "outputRowId": "adverse-events-timing:2"
+        }
+      ],
+      "limitations": [
+        "Symptom text is fictional and uncoded; no medical dictionary is used.",
+        "AESER remains null; the example does not assess seriousness or infer it from severity.",
+        "Partial dates are retained without imputation, and this is not a complete AE dataset."
+      ],
+      "ctClaims": [],
+      "reviewedAt": "2026-10-08"
+    }
+  }
+]

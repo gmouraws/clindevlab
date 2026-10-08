@@ -1,0 +1,82 @@
+import {
+  domains,
+  variables,
+  glossary,
+  examples,
+  domainUrl,
+  variableUrl,
+  profile,
+} from './data';
+import { readArticles } from './content';
+import type { SearchRecord } from './search';
+export function searchIndex(): SearchRecord[] {
+  return [
+    ...domains.map((d) => ({
+      id: d.code,
+      url: domainUrl(d.code),
+      kind: 'domain',
+      title: `${d.code} · ${d.teachingTitle}`,
+      codes: [d.code],
+      domain: d.slug,
+      summary: d.summary,
+      keywords: [d.class],
+      profile: profile.id,
+    })),
+    ...variables.map((v) => ({
+      id: v.id,
+      url: variableUrl(v.domainCode, v.name),
+      kind: 'variable',
+      title: `${v.name} · ${v.domainCode}`,
+      codes: [v.name],
+      domain: v.domainCode.toLowerCase(),
+      summary: v.explanation,
+      keywords: [v.teachingTitle],
+      profile: profile.id,
+    })),
+    ...readArticles().map((a) => ({
+      id: a.slug,
+      url: `/learn/${a.slug}/`,
+      kind: 'article',
+      title: a.title,
+      codes: [],
+      domain: null,
+      summary: a.description,
+      keywords: a.keywords,
+      profile: null,
+    })),
+    ...examples.map((e) => ({
+      id: e.id,
+      url: `/examples/${e.id}/`,
+      kind: 'example',
+      title: e.title,
+      codes: [],
+      domain: e.domain.toLowerCase(),
+      summary: e.summary,
+      keywords: ['synthetic', e.domain],
+      profile: profile.id,
+    })),
+    ...glossary.map((g) => ({
+      id: g.slug,
+      url: `/reference/glossary/#${g.slug}`,
+      kind: 'glossary',
+      title: g.title,
+      codes: [],
+      domain: null,
+      summary: g.explanation,
+      keywords: [g.slug],
+      profile: null,
+    })),
+    {
+      id: 'terminology',
+      url: '/explore/terminology/',
+      kind: 'terminology',
+      title: 'Controlled terminology references',
+      codes: [],
+      domain: null,
+      summary:
+        'Understand codelists, concepts and dated releases. Official terminology is linked, not bundled.',
+      keywords: ['NCI', 'CT', 'codelist'],
+      profile: null,
+    },
+  ];
+}

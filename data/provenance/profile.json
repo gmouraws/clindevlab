@@ -1,0 +1,15 @@
+{
+  "id": "sdtm-2-0_ig-3-4",
+  "modelVersion": "2.0",
+  "igVersion": "3.4",
+  "contentVersion": "1.0.0",
+  "referenceMode": "authored-only",
+  "terminologyMode": "links-only",
+  "ctRelease": null,
+  "sourceIds": [
+    "sdtm",
+    "ig"
+  ],
+  "coverageNotice": "Curated educational coverage. Official metadata is not bundled.",
+  "reviewedAt": "2026-10-08"
+}

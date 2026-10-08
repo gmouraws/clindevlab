@@ -1,0 +1,33 @@
+---
+{"slug":"controlled-terminology","title":"Controlled terminology","description":"Separate a codelist, a concept and the value a dataset actually carries.","order":7,"objective":"Explain why a familiar label is not enough to establish an allowed output value.","prerequisites":"Understand variables and version context.","keywords":["terminology","codelist","NCI","concept","submission value"],"related":["introduction-to-cdisc","variables-and-missingness"],"sources":["nci","library","ig"],"reviewedAt":"2026-10-08"}
+---
+
+## A vocabulary adds another kind of structure
+
+A dataset schema explains where information goes. A vocabulary helps explain which categorical values belong in a particular context. These concerns are related, but one does not replace the other. Knowing that a field contains text tells you little about whether a specific text value is appropriate.
+
+Three identities are useful to distinguish: a codelist, a term concept, and the representation used as a submission value. A human-readable label may be a fourth representation. An application that stores all of these in one generic `code` field makes later interpretation unnecessarily difficult.
+
+## Membership is contextual
+
+A concept can exist in a terminology service without that fact proving it belongs to the list needed for your variable. List membership is a relationship, and its release matters. If your data model uses only a term ID as its primary key, it may erase the context that explains why the term was selected.
+
+For a future approved import, ClinDevLab's design uses a release, codelist ID and term ID together for membership. That is an architectural contract, not a claim that any particular IDs have been verified here. The baseline edition contains no terminology corpus and makes no automatic variable-to-list associations.
+
+## Worked example: the teaching token
+
+The [vital-signs example](/examples/vital-signs-rows/) uses `DEMO_A` as a fictional measurement token. It distinguishes two observations for a lesson about row structure. It is not presented as an official submission value. Calling it “controlled terminology” simply because it is consistent across four rows would give the token an authority it does not have.
+
+A real integration would need to identify the applicable list, verify the intended release, inspect the correct output representation and document the mapping. A display label that looks equivalent is not sufficient evidence. Neither is a search result from a broader terminology browser with no recorded list membership.
+
+## Extensibility is not universal permission
+
+Some terminology contexts allow extensions under applicable rules. That cannot be generalized into permission to add any convenient value to every list. A software model should preserve the relevant list-level information and keep an unverified property explicitly unknown. Do not assume a boolean default answers a standards question.
+
+Versioning creates a similar trap. A current vocabulary download can change independently from an implementation guide. A reproducible pipeline identifies the particular release it used rather than fetching a mutable “latest” file during every production build. Even a publicly available file needs its own provenance and distribution review before it enters a distributable application.
+
+## Engineering pitfall: relabeling is not mapping
+
+Changing capitalization or replacing a UI label with a short string is a text transformation. It is not necessarily a correct vocabulary mapping. Preserve the original value, the mapping decision and its source. If a value cannot be mapped confidently, represent that limitation rather than substituting a plausible term.
+
+NCI provides an official distribution route for CDISC terminology. This site links to it through [terminology references](/explore/terminology/) and records the permission context in its [source register](/reference/sources/). That permission does not automatically cover official SDTM tables, external medical dictionaries or questionnaire content. Keeping those boundaries explicit allows the small educational explorer to remain useful without inventing or republishing a standards database.

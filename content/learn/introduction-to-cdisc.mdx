@@ -1,0 +1,33 @@
+---
+{"slug":"introduction-to-cdisc","title":"Introduction to CDISC","description":"Place collection, exchange, tabulation and analysis standards in an engineering workflow.","order":3,"objective":"Identify which standards question belongs to which layer of a data pipeline.","prerequisites":"Understand collection versus exported data.","keywords":["CDISC","CDASH","ODM","ADaM","Define-XML"],"related":["understanding-sdtm","controlled-terminology"],"sources":["sdtm","ig","library","nci"],"reviewedAt":"2026-10-08"}
+---
+
+## A name for a standards family
+
+CDISC is not a single JSON schema, a database engine or a synonym for an export file. It is an organization associated with a family of clinical data standards. When a requirement says “support CDISC,” the useful next question is which standard, version, representation and use case it means. Without those details, two engineers can implement different things while believing they agree.
+
+For orientation, collection, exchange, tabulation and analysis are useful concerns to separate. CDASH is relevant to collection standardization; ODM to structured exchange; SDTM to tabular study-data organization; ADaM to analysis-data context. This learning path concentrates on selected SDTM concepts. Mentioning the other standards does not mean ClinDevLab implements them or distributes their specifications.
+
+## Separate a model from its application
+
+The model and an implementation guide are related but distinct documents. Our teaching context names SDTM 2.0 and SDTMIG 3.4 separately. A version number of 3.4 is not a newer spelling of model 2.0. A data record that stores only `standardVersion: 3.4` leaves its reader guessing which artifact that number identifies.
+
+A better application record has explicit fields for model, guide and any terminology release actually used. It also records where a fact came from. These are ordinary software-engineering practices—clear names, stable identities and provenance—applied to a domain in which similar-looking version labels can mean different things.
+
+## Worked example: a misleading configuration
+
+Suppose a configuration contains `format: CDISC` and `version: latest`. That is difficult to test or reproduce. A later build may resolve “latest” differently, and the format label does not tell you whether the system handles exchange messages, tabular data or dataset descriptions. The ambiguity is a design problem before it becomes a coding problem.
+
+ClinDevLab instead declares a fixed teaching profile and a separate content release. Its terminology mode is links-only: no imported codelists are present. This means you can inspect an example without mistaking an unverified token for an approved vocabulary value. A future import would require its own dated source and permission evidence.
+
+## Metadata needs its own representation
+
+A CSV file exposes column names and cell values, but it cannot explain every interpretation decision. Dataset descriptions and provenance help a reader understand what those fields mean and how values were obtained. Define-XML is relevant to dataset metadata, but producing a file with that name is not the same as producing a correct submission description.
+
+Our example manifests are simpler, independently authored teaching artifacts. They describe input-to-output links, field order, null conventions and known limitations. They are deliberately not called Define-XML or a replacement for an official metadata standard. Naming the boundary prevents a convenient demo format from acquiring authority it has not earned.
+
+## Engineering pitfall: access is not permission to redistribute
+
+A public page, account or API can make information readable without granting permission to publish a copy in your application. Treat rights as a separate input to a data pipeline. This edition links official sources and supplies original explanations; it does not copy official domain tables or Library responses.
+
+Use the [sources register](/reference/sources/) to see that distinction in practice. Then read [Understanding SDTM](/learn/understanding-sdtm/) for the selected domain structure and [Controlled terminology](/learn/controlled-terminology/) for why vocabulary release identity is a separate concern.

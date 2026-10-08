@@ -1,0 +1,290 @@
+[
+  {
+    "slug": "study",
+    "title": "A defined research investigation",
+    "explanation": "A study establishes the context in which participants, observations and procedures have meaning. Treat its identifier as part of your data's scope rather than as a display-only label.",
+    "article": "clinical-trials-for-developers",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "protocol",
+    "title": "The plan behind the data",
+    "explanation": "The protocol describes the intended investigation. An application schema implements selected operational needs; it does not replace the protocol or prove that every procedure happened.",
+    "article": "clinical-trials-for-developers",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "subject",
+    "title": "The participant represented in records",
+    "explanation": "Here, subject refers to the fictional participant to whom records relate. Our identifiers are invented; no person can be looked up from them.",
+    "article": "clinical-trials-for-developers",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "site",
+    "title": "A study's operational location context",
+    "explanation": "A site identifies where study activities are organized. A site-local participant label may collide with a label elsewhere, so identity design needs explicit scope.",
+    "article": "clinical-trials-for-developers",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "visit",
+    "title": "A grouping of study activities",
+    "explanation": "A visit can organize related activities, but planned and actual activity timing need not coincide. Do not derive observation dates solely from a visit schedule.",
+    "article": "clinical-data-models",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "ecrf",
+    "title": "Electronic case report form",
+    "explanation": "An eCRF collects a chosen set of study information. A form is a collection interface; its fields need not map one-to-one to output columns or datasets.",
+    "article": "how-edc-systems-work",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "edc",
+    "title": "Electronic data capture",
+    "explanation": "EDC software supports collecting and managing study data. Its operational records and exports serve different tasks and may use different structures.",
+    "article": "how-edc-systems-work",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "audit-trail",
+    "title": "History of recorded changes",
+    "explanation": "An audit history makes changes attributable and inspectable. A current-value export alone usually cannot explain who changed a record or why.",
+    "article": "how-edc-systems-work",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "data-query",
+    "title": "A question about recorded data",
+    "explanation": "A data query flags an issue needing clarification. Closing a query is a workflow event, not automatically proof that every downstream representation is correct.",
+    "article": "how-edc-systems-work",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "cdisc",
+    "title": "An organization and a family of standards",
+    "explanation": "CDISC develops standards for clinical research data. Name the particular standard and version rather than treating CDISC as a single file format.",
+    "article": "introduction-to-cdisc",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "cdash",
+    "title": "A data-collection standards context",
+    "explanation": "CDASH addresses collection standardization. This curriculum only introduces its relationship to later representations; it does not reproduce collection specifications.",
+    "article": "introduction-to-cdisc",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "odm",
+    "title": "An exchange-oriented standard",
+    "explanation": "ODM is relevant to structured clinical data exchange. It is distinct from a table of observations, and this site does not implement an ODM reader or writer.",
+    "article": "introduction-to-cdisc",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "sdtm",
+    "title": "A model for tabular study data",
+    "explanation": "SDTM provides a conceptual organization for study data. Our lessons illustrate selected structures without supplying the complete normative model.",
+    "article": "understanding-sdtm",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "sdtmig",
+    "title": "An implementation guide",
+    "explanation": "An SDTM implementation guide adds context for applying the model. Record its version separately; the number is not the model version.",
+    "article": "understanding-sdtm",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "domain",
+    "title": "A group of related observations",
+    "explanation": "A domain gives a dataset a subject-matter context. Its identity is not necessarily the same as a screen, form or operational database table.",
+    "article": "understanding-sdtm",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "variable",
+    "title": "An attribute in a representation",
+    "explanation": "A variable gives a column meaning. Knowing its name does not by itself establish its allowed values, requiredness or derivation.",
+    "article": "variables-and-missingness",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "observation",
+    "title": "Something represented about a subject",
+    "explanation": "An observation is a useful unit for reasoning about repeated measurements or occurrences. First ask what one output row represents.",
+    "article": "clinical-data-models",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "identifier",
+    "title": "A value used to distinguish entities",
+    "explanation": "An identifier should preserve its exact representation and scope. A numeric-looking identifier is not necessarily a number suitable for arithmetic.",
+    "article": "variables-and-missingness",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "controlled-terminology",
+    "title": "Values governed by a vocabulary",
+    "explanation": "Controlled terminology helps make categorical values interpretable across systems. Its release and applicable list matter alongside the dataset structure.",
+    "article": "controlled-terminology",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "codelist",
+    "title": "A particular grouping of terms",
+    "explanation": "A codelist defines a vocabulary context. A concept existing in a terminology service does not by itself prove membership in the list needed for your variable.",
+    "article": "controlled-terminology",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "submission-value",
+    "title": "The representation used in an output",
+    "explanation": "A submission value is distinct from a human-friendly label or concept code. This edition does not bundle approved lists or assert that its invented tokens are submission values.",
+    "article": "controlled-terminology",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "metadata",
+    "title": "Information describing the data",
+    "explanation": "Metadata explains structure and interpretation: what a field means, how it is represented, and where it came from. An example value is not a substitute for that description.",
+    "article": "clinical-data-models",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "define-xml",
+    "title": "A dataset-description standard",
+    "explanation": "Define-XML is relevant to describing datasets and their metadata. We link to standards context but do not generate or validate submission documents.",
+    "article": "introduction-to-cdisc",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  },
+  {
+    "slug": "synthetic-data",
+    "title": "Records invented for a demonstration",
+    "explanation": "Our records originate as fictional examples, not from real participants with identifying fields removed. Synthetic does not mean clinically valid or submission-ready.",
+    "article": "edc-to-sdtm-walkthrough",
+    "authorship": "original",
+    "reviewedAt": "2026-10-08",
+    "sourceIds": [
+      "sdtm",
+      "ig"
+    ]
+  }
+]

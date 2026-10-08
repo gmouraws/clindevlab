@@ -1,0 +1,41 @@
+---
+{"slug":"clinical-data-models","title":"Clinical data models","description":"Separate operational entities from observation rows, and make joins deliberate.","order":5,"objective":"Explain how a form-centered representation can differ from a tabular extract.","prerequisites":"Understand subject identity and the six-domain map.","keywords":["relationships","rows","cardinality","schema","join"],"related":["understanding-sdtm","edc-to-sdtm-walkthrough"],"sources":["sdtm","ig","edc"],"reviewedAt":"2026-10-08"}
+---
+
+## A model is a set of choices
+
+Every data model makes some questions easy to ask and others harder. An operational application may group values around a form so that a user can enter and review them together. A tabular extract may instead group observations by topic. Neither arrangement should be copied into the other without first understanding why it exists.
+
+For a developer, the important distinction is between the entity that an interface edits and the observation that an output represents. A single form can contain several measurements. One measurement can require several contextual fields. A relationship diagram should therefore describe actual meanings and cardinalities, not just connect tables whose names look related.
+
+## An authored relationship sketch
+
+```text
+Study CLD-SYN-001
+  ├─ Subject SYN-001
+  │    ├─ Observation obs-a → output row 1
+  │    └─ Observation obs-b → output row 2
+  └─ Subject SYN-002
+       ├─ Observation obs-c → output row 3
+       └─ Observation obs-d → output row 4
+```
+
+This sketch belongs only to our fictional walkthrough. It is not an EDC schema or an official SDTM diagram. It shows the relationship needed to understand four rows: one subject can have more than one observation, and each observation retains a trace link to its source object. It intentionally leaves study operations and submission structures outside the example.
+
+## Worked example: a join that multiplies rows
+
+Suppose the two observations for SYN-001 are joined to two event records using only the subject identifier. The result has four combinations. SQL has not malfunctioned; it has performed the relationship you requested. The question is whether those combinations answer your intended question or merely reflect an accidental many-to-many join.
+
+Before joining, write down the grain of each side and the expected grain of the result. If you need one summary per subject, define the summarization separately. If you need matching by time or context, state that rule explicitly and test edge cases. Do not discard rows with `DISTINCT` just to restore a count that looks familiar.
+
+## Preserve meaning through representation changes
+
+A schema transformation changes the shape of information. It should not silently change its meaning. Moving a date-only value through a timestamp type can add an implicit timezone. Casting a result string into a number can remove a comparison sign. Renaming a field can make a local label look like a controlled term. Each is a semantic decision hiding inside an apparently technical step.
+
+Our examples keep original strings and add a separate mapping manifest. That manifest explains which input field supplied an output value, which constants were authored for the demonstration, and where information is missing. It does not attempt to serialize every rule a real clinical pipeline would require.
+
+## Engineering pitfall: losing provenance at the boundary
+
+If a transformed row cannot be traced back to its input, debugging becomes guesswork. File names and row numbers alone are fragile when extracts are reordered or combined. Preserve a stable source identity and the mapping revision in a form suited to your system. Do not invent a standard variable merely to carry that internal trace.
+
+Inspect both table and record-reading modes in the [four-observation example](/examples/vital-signs-rows/). They show the same information in different layouts. That is also a useful design principle for the application itself: presentation can change for a small screen while the underlying values, identities and explanatory context remain intact.

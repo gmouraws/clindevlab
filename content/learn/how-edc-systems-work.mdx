@@ -1,0 +1,33 @@
+---
+{"slug":"how-edc-systems-work","title":"How EDC systems work","description":"Separate collection workflows, recorded values and the exports developers consume.","order":2,"objective":"Trace a collected value without confusing workflow state with data meaning.","prerequisites":"Read Clinical trials for developers.","keywords":["EDC","eCRF","audit","query","export"],"related":["clinical-trials-for-developers","edc-to-sdtm-walkthrough"],"sources":["edc","sdtm"],"reviewedAt":"2026-10-08"}
+---
+
+## Three concerns that share one interface
+
+Electronic data capture combines a collection interface, recorded study information and workflows around that information. A developer may encounter all three in one API response. Separating them conceptually makes an integration easier to reason about. A form's status tells you something about a process; an entered value tells you something about a particular field; an audit entry describes a change. They should not be collapsed into one boolean such as `complete`.
+
+An electronic case report form is a way to collect selected study information. Its layout helps a person perform a task. A repeated form section, for example, may make several observations convenient to enter together. That does not require an output dataset to preserve the same visual grouping or the same number of rows.
+
+## Follow a value through a change
+
+Consider an entirely invented measurement entered as the text `72`. Later, a correction changes it to `73`. An operational view may show the current value, while a change history preserves the earlier value and context. If your pipeline exports only the latest state, it cannot reconstruct the earlier export merely by rerunning the same query tomorrow.
+
+For reproducibility, document the source extract, its time or version context, and the mapping revision. Do not promise that a current-state API is an immutable archive. The application and its study configuration determine the available history; this lesson does not prescribe a vendor's audit schema or authentication mechanism.
+
+## Data queries are questions, not transformations
+
+A query can ask somebody to clarify a value. Opening or resolving that query is a workflow action. It may lead to a correction, or it may confirm that the original value should remain. Your integration should not treat query resolution as a command to replace the value with a convenient default.
+
+Similarly, a validation message in a collection interface and a standards-conformance issue are different checks. One may concern a local form constraint; another may concern the structure of an exported representation. Neither alone establishes that all clinical or submission questions have been resolved.
+
+## Worked example: repeated observations
+
+Imagine a collection containing four observation objects, each with an ID, subject key, measurement token, recorded value, unit and date. The [vital-signs walkthrough](/examples/vital-signs-rows/) retains those observation IDs in a trace manifest while putting the selected values into four output rows. It does not copy the application IDs into invented standard variables.
+
+The manifest explains each mapping and declares the information it does not supply. That makes the example useful to inspect even though it is intentionally incomplete. A developer can answer which input object produced a row without claiming the transformation is a production-ready EDC integration.
+
+## Engineering pitfall: equating transport success with correctness
+
+An HTTP success response establishes that a request completed according to the service's contract. It does not establish that the right study was selected, that the extract is complete, or that a value's unit was preserved. Integration tests should therefore cover identity, record counts, repeated data and representation as well as transport errors.
+
+When exploring a real vendor's public documentation, identify the product version and whether the page describes current or legacy behavior. Our linked OpenClinica material is a legacy technical reference used for conceptual context, not an instruction to implement a current API. ClinDevLab runs no EDC connection and accepts no study uploads. Its purpose is to help you ask better engineering questions before implementing one.

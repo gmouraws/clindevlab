@@ -1,0 +1,19 @@
+node_modules/
+.next/
+out/
+artifacts/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+!.env.example
+public/search-index.json
+public/examples-data/
+public/third-party-notices.txt
+public/license-inventory.json
+.vercel/
+*.log
+.DS_Store
+Thumbs.db
+# Local safety instructions remain authoritative locally and are not a public artifact.
+AGENTS.md
